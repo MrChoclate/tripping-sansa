@@ -10,7 +10,7 @@ router = routers.DefaultRouter(trailing_slash=False)
 
 router.register(r'product', ProductViewSet)
 router.register(
-    r'product_version_relationship', Product_version_relationshipViewSet)
+    r'product_relationship', Product_relationshipViewSet)
 router.register(r'product_version', Product_versionViewSet)
 router.register(
     r'product_version_relationship', Product_version_relationshipViewSet)

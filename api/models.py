@@ -4,29 +4,43 @@ from django.db import models
 class Product(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
+    product_relationship = models.OneToOneField(
+        'Product_relationship', blank=True, null=True, related_name='+')
 
 
-class Product_version_relationship(models.Model):
+class Product_relationship(models.Model):
     relation_type = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
+    related_product = models.ForeignKey(
+        'Product', blank=True, null=True, related_name='+')
+    relating_product = models.ForeignKey(
+        'Product', blank=True, null=True, related_name='+')
 
 
 class Product_version(models.Model):
     description = models.TextField(blank=True, null=True)
     product = models.OneToOneField('Product', blank=True, null=True)
+    relationship = models.ForeignKey(
+        'Product_version_relationship', blank=True, null=True)
 
 
 class Product_version_relationship(models.Model):
     description = models.TextField(blank=True, null=True)
+    related_version = models.ForeignKey(
+        'Product_version', blank=True, null=True, related_name='+')
+    relating_version = models.ForeignKey(
+        'Product_version', blank=True, null=True, related_name='+')
 
 
 class Product_category(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
+    assigment = models.OneToOneField(
+        'Product_category_assignment', blank=True, null=True, related_name='category')
 
 
 class Product_category_assignment(models.Model):
-    pass
+    products = models.ManyToManyField('Product', related_name="categories")
 
 
 class Product_category_hierarchy(models.Model):

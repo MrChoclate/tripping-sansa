@@ -9,9 +9,9 @@ class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
 
 
-class Product_version_relationshipViewSet(viewsets.ModelViewSet):
-    queryset = Product_version_relationship.objects.all()
-    serializer_class = Product_version_relationshipSerializer
+class Product_relationshipViewSet(viewsets.ModelViewSet):
+    queryset = Product_relationship.objects.all()
+    serializer_class = Product_relationshipSerializer
 
 
 class Product_versionViewSet(viewsets.ModelViewSet):

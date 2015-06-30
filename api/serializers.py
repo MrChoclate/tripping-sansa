@@ -7,42 +7,44 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ('id', 'name', 'description')
+        fields = (
+            'id', 'name', 'description', 'product_relationship', 'categories')
 
 
-class Product_version_relationshipSerializer(serializers.ModelSerializer):
+class Product_relationshipSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Product_version_relationship
-        fields = ('id', 'relation_type', 'description')
+        model = Product_relationship
+        fields = ('id', 'relation_type', 'description',
+                  'relating_product', 'related_product')
 
 
 class Product_versionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product_version
-        fields = ('id', 'description')
+        fields = ('id', 'description', 'relationship')
 
 
 class Product_version_relationshipSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product_version_relationship
-        fields = ('id', 'description')
+        fields = ('id', 'description', 'related_version', 'relating_version')
 
 
 class Product_categorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product_category
-        fields = ('id', 'name', 'description')
+        fields = ('id', 'name', 'description', 'assigment')
 
 
 class Product_category_assignmentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product_category_assignment
-        fields = ('id',)
+        fields = ('id', 'products')
 
 
 class Product_category_hierarchySerializer(serializers.ModelSerializer):

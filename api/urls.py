@@ -2,11 +2,11 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 from rest_framework import routers
+from rest_framework_bulk.routes import BulkRouter
 
 from api.views import *
 
-router = routers.DefaultRouter(trailing_slash=False)
-
+router = BulkRouter()
 
 router.register(r'product', ProductViewSet)
 router.register(

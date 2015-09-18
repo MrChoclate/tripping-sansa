@@ -58,7 +58,7 @@ class Product_category_hierarchySerializer(BulkSerializerMixin, serializers.Mode
 
     class Meta(object):
         model = Product_category_hierarchy
-        fields = ('id',)
+        fields = ('id', 'super_category', 'sub_category')
         list_serializer_class = BulkListSerializer
 
 
@@ -66,7 +66,7 @@ class Product_view_definitionSerializer(BulkSerializerMixin, serializers.ModelSe
 
     class Meta(object):
         model = Product_view_definition
-        fields = ('id', 'name', 'additionnal_characterization')
+        fields = ('id', 'name', 'additionnal_characterization', 'relating_view', 'contexts')
         list_serializer_class = BulkListSerializer
 
 
@@ -107,7 +107,7 @@ class Assembly_component_relationshipSerializer(BulkSerializerMixin, serializers
 
     class Meta(object):
         model = Assembly_component_relationship
-        fields = ('id', 'location_indicator')
+        fields = ('id', 'location_indicator', 'quantity', 'substitute')
         list_serializer_class = BulkListSerializer
 
 
@@ -115,7 +115,7 @@ class Next_assembly_usageSerializer(BulkSerializerMixin, serializers.ModelSerial
 
     class Meta(object):
         model = Next_assembly_usage
-        fields = ('id',)
+        fields = ('id', 'sub_assembly_relationship')
         list_serializer_class = BulkListSerializer
 
 
@@ -139,7 +139,7 @@ class Value_with_unitSerializer(BulkSerializerMixin, serializers.ModelSerializer
 
     class Meta(object):
         model = Value_with_unit
-        fields = ('id',)
+        fields = ('id', 'unit', 'value_component')
         list_serializer_class = BulkListSerializer
 
 

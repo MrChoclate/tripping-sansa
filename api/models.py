@@ -44,12 +44,17 @@ class Product_category_assignment(models.Model):
 
 
 class Product_category_hierarchy(models.Model):
-    pass
-
+    sub_category = models.ForeignKey('Product_category', blank=True,
+        null=True, related_name='+')
+    super_category = models.ForeignKey('Product_category', blank=True,
+        null=True, related_name='+')
 
 class Product_view_definition(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
     additionnal_characterization = models.TextField(blank=True, null=True)
+    relating_view  = models.ForeignKey('self', blank=True, null=True,
+        related_name='related_view')
+    contexts = models.ManyToManyField('View_definition_context')
 
 
 class View_definition_context(models.Model):
@@ -73,11 +78,12 @@ class View_definition_usage(View_definition_relationship):
 
 class Assembly_component_relationship(View_definition_usage):
     location_indicator = models.TextField(blank=True, null=True)
-
+    quantity = models.ForeignKey('Value_with_unit', blank=True, null=True)
+    substitute = models.ForeignKey('self', blank=True, null=True)
 
 class Next_assembly_usage(Assembly_component_relationship):
-    pass
-
+    sub_assembly_relationship = models.ForeignKey(
+        'Component_upper_level_identification', blank=True, null=True)
 
 class Component_upper_level_identification(Assembly_component_relationship):
     pass
@@ -88,8 +94,8 @@ class Promissory_usage(Assembly_component_relationship):
 
 
 class Value_with_unit(models.Model):
-    pass
-
+    unit = models.ForeignKey('Unit')
+    value_component = models.ForeignKey('Measure_value')
 
 class Unit(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
